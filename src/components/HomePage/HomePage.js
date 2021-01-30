@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import moment from "moment";
 import "./HomePage.css";
 import News from "../News/News";
 import Search from "../Nav/search";
@@ -6,26 +7,28 @@ const HomePage = ({ user, search, newsData, setNews, handleNewSearch }) => {
   const { userName } = user;
   const firstName = userName.split(" ").slice(0, 1);
   const apiKey = process.env.REACT_APP_GUARDIAN_API_KEY;
-
+  const date = moment().format("YYYY-MM-DD");
+  console.log(date);
   useEffect(() => {
     async function getNews() {
-      if (!search) {
-        let response = await fetch(
-          `https://content.guardianapis.com/search?show-fields=thumbnail&api-key=${apiKey}`
-        );
-        const data = await response.json();
-        setNews(data.response.results);
-        console.log(data);
-      }
+      // if (!search) {
       let response = await fetch(
-        `https://content.guardianapis.com/search?${search}&show-fields=thumbnail&api-key=${apiKey}`
+        `https://content.guardianapis.com/search?from-date=${date}&to-date=${date}&${search}&show-fields=thumbnail&api-key=${apiKey}`
       );
       const data = await response.json();
       setNews(data.response.results);
       console.log(data);
+      // }
+
+      // let response = await fetch(
+      //   `https://content.guardianapis.com/search?${search}&show-fields=thumbnail&api-key=${apiKey}`
+      // );
+      // const data = await response.json();
+      // setNews(data.response.results);
+      // console.log(data);
     }
     getNews();
-  }, [search]);
+  }, [search, date, apiKey, setNews]);
 
   return (
     <div>

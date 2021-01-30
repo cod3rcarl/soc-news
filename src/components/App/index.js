@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import Login from "../Login/login";
 import Nav from "../Nav/Nav";
 import HomePage from "../HomePage/HomePage";
@@ -23,7 +23,7 @@ function App() {
   function setNews(news) {
     setNewsData(news);
   }
-
+  const myNews = useCallback(setNews, []);
   async function handleGoogle() {
     const user = await signInWithGoogle();
     const newUser = {
@@ -46,7 +46,7 @@ function App() {
           user={user}
           search={search}
           newsData={newsData}
-          setNews={setNews}
+          setNews={myNews}
           handleNewSearch={handleNewSearch}
         />
       )}

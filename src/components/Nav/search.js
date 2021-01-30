@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 const Search = ({ handleNewSearch }) => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("headlines");
 
   function clearSearchField() {
     Array.from(document.querySelectorAll("input")).forEach(
