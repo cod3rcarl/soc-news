@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Nav({ user, signOut }) {
-  const { email, id, photo, userName } = user;
+  const { email, photo } = user;
   const classes = useStyles();
   return (
     <div id="nav-bar" className={classes.root}>
